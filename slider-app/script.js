@@ -103,3 +103,13 @@ function  showSlide(i) {
     
     document.querySelector('.card-link').setAttribute('href',models[index].link);
 }
+
+ids = document.querySelector(".card-title");
+
+ids.style.fontSize = "22px"
+ids.style.fontWeight = "bold"
+ids.style.fontFamily = "Lucida Sans"
+ids.style.color = "#4D302A"
+
+cntr = document.querySelector(".cdcntr")
+ids.style.textAlign = "center"
