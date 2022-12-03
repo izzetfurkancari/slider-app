@@ -28,19 +28,61 @@ var models = [
 
 var index = 0;
 var slaytCount = models.length;
+var interval;
 
-showSlide(index)
+var settings ={
+    duration : "2000",
+    random   : false
+}
+
+init(settings)
 
 document.querySelector(".fa-circle-arrow-left").addEventListener("click", function(){
     index--;
-    showSlide(index)
-    console.log(index);
+    showSlide(index);
 })
 document.querySelector(".fa-circle-arrow-right").addEventListener("click", function(){
     index++;
     showSlide(index)
-    console.log(index);
 })
+
+document.querySelectorAll(".arrow").forEach(item => {
+    item.addEventListener("mouseenter", () => {
+        clearInterval(interval)
+    } )
+})
+
+document.querySelectorAll(".arrow").forEach(item => {
+    item.addEventListener("mouseleave", () => {
+        init(settings)
+    })
+})
+
+function init(settings){
+
+    var prev;
+
+    interval = setInterval(function(){
+
+        if (settings.random){
+            //random index
+            do {
+                index = Math.floor(Math.random() * slaytCount);
+            }while(index == prev)
+            prev = index
+        }else {
+            //artan index
+            if (slaytCount == index + 1) {
+                index = -1;
+            }
+            showSlide(index)
+            console.log(index);
+            index++;
+        }
+
+        showSlide(index)
+    },settings.duration)
+}
 
 function  showSlide(i) {
 
@@ -53,7 +95,6 @@ function  showSlide(i) {
         index = 0
     }
 
-    console.log(i);
 
     document.querySelector('.card-title').textContent = models[index].name;
 
